@@ -1,14 +1,45 @@
 import { faker } from '@faker-js/faker';
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common/exceptions';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
-import { hash } from 'argon2';
+import { hash, verify } from 'argon2';
+import { NotFoundError } from 'rxjs';
 import { PrismaService } from 'src/prisma.service';
-import { AuthDto } from './auth.dto';
+import { AuthDto } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
     constructor(private prismaService: PrismaService, private jwt: JwtService) {} // мы принимает базу данных, но для этого мы подключали его в auth.module.ts
+
+    async login(dto: AuthDto) {
+        const user = await this.validateUser(dto)
+        const token = await this.issueTokens(user.id)
+
+        return{
+            user: this.returnUserFields(user),
+            ...token
+        }
+    }
+
+    async getNewTokens(refreshToken: string) {
+        console.log(refreshToken)
+        const result = await this.jwt.verifyAsync(refreshToken)
+        if(!result) throw new UnauthorizedException('Invalid refresh token')
+
+        const user = await this.prismaService.user.findUnique({
+            where: {
+                id: result.id
+            }
+        })
+        
+        const tokens = await this.issueTokens(user.id)
+
+        return{
+            user: this.returnUserFields(user),
+            ...tokens
+        }
+    }
 // получение старого юзера по mail 14-19
     async register(dto: AuthDto) {
         const oldUser = await this.prismaService.user.findUnique({
@@ -34,7 +65,7 @@ export class AuthService {
 
         return {
             user: this.returnUserFields(user),
-            tokens
+            ...tokens
         }
     }
     // тут храняться токены, которые будут храниться час и 7 дней 
@@ -58,6 +89,22 @@ export class AuthService {
             email:user.email,
 
         }
+    }
+
+    private async validateUser(dto: AuthDto) {
+        const user = await this.prismaService.user.findUnique({
+            where: {
+                email: dto.email
+            }
+        })
+        if (!user) throw new NotFoundException('User not found')
+
+        const isValid = await verify(user.password, dto.password)
+
+        if (!isValid) throw new UnauthorizedException('Invalid password')
+
+        return user
+        
     }
     } 
 
