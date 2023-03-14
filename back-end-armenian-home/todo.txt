@@ -1,5 +1,5 @@
 [] - вынести логику получения юзера за рамки auth service 
-[]
+[] - создать модели Product Order OrderItems Category Review 
 []
 []
 []
