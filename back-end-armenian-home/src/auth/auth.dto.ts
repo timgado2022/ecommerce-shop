@@ -1,6 +1,6 @@
 import { IsEmail } from "class-validator";
 import { IsString, MinLength } from "class-validator";
-
+// class-validator - это библиотека, которая позволяет навешивать декораторы внутри класса для валидации
 export class AuthDto {
     // если хотите, чтобы это поле было необязательным, то нужно сюда добавить библиотеку IsOptional
     @IsEmail()
