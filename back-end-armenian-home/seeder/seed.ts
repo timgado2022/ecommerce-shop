@@ -6,20 +6,27 @@ const prisma = new PrismaClient()
 
 const createProducts = async (quantity: number) => {
     
-    const product : Product[] = [
-        {id: 1 ,name: "Компьютер",slug: "",description: "", price: 1000, images: [""], category: "Компьютеры" },
-    ]
-
-    const category : Category[] = [
-        {id: 1 ,name: "Компьютеры", createdAt: , updatedAt: , slug: "", description: "" },
-    ]
-
-
-
-    
+    const product : Product[] = []
 
     console.log(`Created ${product.length} products`)
+
 }
+
+// const createProducts = await prisma.product.create({
+//     data: {
+//         name: "Kerakur. Икра баклажановая",
+//         slug: "kerakur ikra",
+//         description: "Икра баклажановая",
+//         price: 250,
+//         images: [],
+//         category: {
+//             create:{
+//                 name: "Овощная консервация",
+//                 slug: "ovoschnaya-konservatsiya", 
+//             }
+//         }
+//     }
+// })
 
 async function main() {
     console.log("Start seeding...")   
