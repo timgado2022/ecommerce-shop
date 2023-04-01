@@ -1,7 +1,11 @@
+Backend
 [] - вынести логику получения юзера за рамки auth service 
 [] - создать модели Product Order OrderItems Category Review 
-[] - создать админ панель(front)
 [] - объединить byId и bySlug
 []
 []
 []
+
+Frontend
+[] - создать админ панель(front)
+[] - добавить средний рейтинг в карточку товара

@@ -1,13 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { returnCategoryObject } from './return-category.object';
 import { CategoryDto } from './category.dto';
+import { generateSlug } from 'src/utils/generate-slug';
 
 @Injectable()
 export class CategoryService {
     constructor(private prisma: PrismaService) {}
-    // сервис готовый
-    // получение по айдишнику 
+    // сервис категорий
+
+    //метод получение по айдишнику 
     async byId(id:number){
         const category = await this.prisma.category.findUnique({
             where: {
@@ -17,12 +19,12 @@ export class CategoryService {
         })
 
         if(!category){
-            throw new Error('Category not found')
+            throw new NotFoundException('Category not found')
         }
 
         return category
     }
-    // получение слагов
+    // метод получение слагов
     async bySlug(slug:string){
         const category = await this.prisma.category.findUnique({
             where: {
@@ -37,13 +39,13 @@ export class CategoryService {
 
         return category
     }
-    // получение всех
+    // метод получение всех категорий
     async getAll() {
         return this.prisma.category.findMany({
             select: returnCategoryObject // забираем поля, которые нужны 
         })
     }
-    // создание
+    // метод создание своей категории
     async create() {
         return this.prisma.category.create({
             data: {
@@ -52,7 +54,7 @@ export class CategoryService {
             }
         })
     }
-    // обновление
+    // метод обновление категории
     async update(id: number, dto: CategoryDto ) {
         return this.prisma.category.update({
             where: {
@@ -64,7 +66,7 @@ export class CategoryService {
             }
         })
     }
-    // удаление
+    // метод удаления метода
     async delete(id: number ) {
         return this.prisma.category.delete({
             where: {
