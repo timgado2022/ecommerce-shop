@@ -1,7 +1,7 @@
 [] - вынести логику получения юзера за рамки auth service 
 [] - создать модели Product Order OrderItems Category Review 
-[]
-[]
+[] - создать админ панель(front)
+[] - объединить byId и bySlug
 []
 []
 []
