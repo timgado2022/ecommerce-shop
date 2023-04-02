@@ -20,8 +20,8 @@ export class ReviewController {
   @HttpCode(200)
   @Post('leave/:productId')
   @Auth()
-  async leaveReview(@CurrectUser('id') id:number, @Body() dto: ReviewDto, @Param('productId') productId: number) {
-    return this.reviewService.create(id, dto, productId);
+  async leaveReview(@CurrectUser('id') id:number, @Body() dto: ReviewDto, @Param('productId') productId: string) {
+    return this.reviewService.create(id, dto, +productId);
     
   }
 }

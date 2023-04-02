@@ -25,7 +25,7 @@ export class ReviewService {
                 ...dto,
                 product: {
                     connect: {
-                        id: productId 
+                        id: productId,
                     }
                 },
                 user: {
