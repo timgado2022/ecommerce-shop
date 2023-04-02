@@ -1,73 +1,40 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Armenian Home Store  backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Project Progress 
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+07.03.2023 - created this project, added nest.js, prisma. In prisma added the User model, also said to work Beekeeper Studio to connect it to PostgreSQL. Ended the day with the fact that it failed to connect to PostgreSQL. 
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+08.03.2023 - started fixing my mistake, it turns out that when I downloaded postgres to windows, I put it on port 5000, not 5432, this was my mistake, and then when I corrected it, everything worked, and beekeeper studio created me a table with the data that I had in schema.prisma, also today added auth, in auth.controller. ts(in the folder auth) added @Post inside which register, which returns this.authService.register(), and in auth.service. ts wrote the logic itself register, which returns name: "example_name", also to check if the request went through, I connected insomnia, added there folder auth and inside this folder there are 3 posts with names: auth/login/access-token; auth/register/auth/login, worked today with auth/register, I wrote in json folder: {test values email and password}, and in environment wrote url, where the link to the site is(localhost:4200/api) and token, fixed the errors and everything worked for me(in preview the logic that I wrote in auth.servise.ts(to have it return me name)                        
 
-## Installation
 
-```bash
-$ npm install
-```
 
-## Running the app
+(ru: 
 
-```bash
-# development
-$ npm run start
 
-# watch mode
-$ npm run start:dev
 
-# production mode
-$ npm run start:prod
-```
+07.03.2023 - создала данный проект, добавила в него nest.js, prisma. В prisma добавила модель User, также сказала для работы Beekeeper Studio, чтобы соединить его с PostgreSQL. Закончила этот день на том, что не удалось соединиться с PostgreSQL. 
+08.03.2023 - начала устранять свою ошибку, оказывается, когда я скачивала postgres на windows, я его поставила на порту 5000, а не на 5432, в этом была моя ошибка, и тогда, когда я ее исправила, у меня все заработало, и beekeeper studio создала мне таблицу с данными, которые были у меня в schema.prisma, также сегодня добавила auth, в auth.controller.ts(в папке auth) добавила @Post внутри которого register, который возвращает this.authService.register(), а в auth.service.ts написана сама логика register, который возвращает name: "example_name", также чтобы проверить прошел ли запрос, я подключила insomnia, добавила там папку auth и внутри этой папки есть 3 post с названиями: auth/login/access-token; auth/register/auth/login, работала сегодня с auth/register, написала в json папке: {тестовые значения email и password}, а в environment написала url, там, где находится ссылка на сайт(localhost:4200/api) и token, устранила ошибки и у меня все заработало(в preview высветилось логика, которую я написала в auth.servise.ts(чтобы он мне вернул name)
 
-## Test
 
-```bash
-# unit tests
-$ npm run test
+10.03.2023 - я изменила app.module, создала сервис auth, изменила auth.module(добавила в провайдере prisma), добавила auth.dto, изменила auth service, добавила jwt.config, изменила main.ts, добавив: "const prismaService = app.get(PrismaService); await prismaService.enableShutdownHooks(app)" и создала файл prisma.service
 
-# e2e tests
-$ npm run test:e2e
+11.03.2023 - изменение auth.module, добавление в app.module imports, в файле auth.service добавила токены, также добавила файл jwt.stategy
 
-# test coverage
-$ npm run test:cov
-```
+14.03.2023 - изменение auth.dto, добавив class-validator, в auth.service добавлены методы: генерирование юзера,  добавление в app.module import user module, описала логику login и получения токена, также добавила validateUser, добавила файл auth.decorator, также user.decorator в auth.controller описана логика, чтобы заработали запросы в insomnia, чтобы посмотреть все ли работает или нет , создала файл refresh-token dto и описала каким он должен быть, создала сервис USER и написала себе todo лист, также в prisma.schema добавила модели(product, category, order и тд и тп)
 
-## Support
+16.03.2023 - подкорректировала модели в prisma, user.controller описала запросы usera(get profile, update profile, toggleFavorite), сделала отдельное dto для user, в user.module в провайдере импортировала prisma , в самом user service описала же эти запросы через export class userService и там же async byId, updateProfile, toggleFavorite
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+18.03.2023 - 
 
-## Stay in touch
+19.03.2023 -
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+23.03.2023
 
-## License
+01.04.2023 - 
 
-Nest is [MIT licensed](LICENSE).
+02.04.2023 
+
+
+)
+
