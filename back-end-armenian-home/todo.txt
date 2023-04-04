@@ -3,7 +3,7 @@ Backend
 [] - создать модели Product Order OrderItems Category Review 
 [] - объединить byId и bySlug
 [] - дополнительная проверка на существование товара, когда создаем отзыв 
-[]
+[] - закончить статистику 
 []
 
 Frontend
