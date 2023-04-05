@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpCode, Param, Patch, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Auth } from 'src/auth/decorators/auth.decorator';
-import { CurrectUser } from 'src/auth/decorators/user.decorator';
+import { CurrentUser } from 'src/auth/decorators/user.decorator';
 import { RefreshTokenDto } from 'src/auth/dto/refresh-token.dto';
 import { UserDto } from './user.dto';
 import { UserService } from './user.service';
@@ -16,7 +16,7 @@ export class UserController {
 
   @Get('profile')
   @Auth()
-  async getProfile(@CurrectUser('id') id: number) {
+  async getProfile(@CurrentUser('id') id: number) {
     return this.userService.byId(id);
   } 
 
@@ -24,7 +24,7 @@ export class UserController {
   @HttpCode(200) 
   @Auth()
   @Put('profile')
-  async getNewTokens(@CurrectUser('id') id: number, @Body() dto: UserDto) {
+  async getNewTokens(@CurrentUser('id') id: number, @Body() dto: UserDto) {
     return this.userService.updateProfile(id,dto);
   } 
 
@@ -32,7 +32,7 @@ export class UserController {
   @HttpCode(200) 
   @Auth()
   @Patch('profile/favorites/:productId')
-  async toggleFavorite(@Param('productId') productId: string, @CurrectUser('id') id: number) {
+  async toggleFavorite(@Param('productId') productId: string, @CurrentUser('id') id: number) {
     return this.userService.toggleFavorite(id, +productId);
   } 
 

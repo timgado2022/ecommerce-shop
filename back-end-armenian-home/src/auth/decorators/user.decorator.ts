@@ -5,7 +5,7 @@ import {User} from "@prisma/client";
 
 
 // берем CurrectUser, присваиваем ей значение из import дальше стрелочная функция 
-export const CurrectUser = createParamDecorator(
+export const CurrentUser = createParamDecorator(
     (data: keyof User, ctx: ExecutionContext) => {
         const request = ctx.switchToHttp().getRequest();
         const user = request.user;
