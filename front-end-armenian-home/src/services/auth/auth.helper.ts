@@ -21,7 +21,8 @@ export const saveToStorage = (data: IAuthResponse) => {
     localStorage.setItem('user', JSON.stringify(data.user))
 }
 
-export const removeTokensStorage = () => {
+export const removeFromStorage = () => {
     Cookies.remove('accessToken')
     Cookies.remove('refreshToken')
+    localStorage.removeItem('user')
 }
