@@ -46,6 +46,7 @@ export class UserService {
 
         if(isSameUser && id === isSameUser.id){ // где-то тут может быть ошибка
             throw new BadRequestException('Email is already in use')
+        }
         
         const user = await this.byId(id)
 
@@ -62,7 +63,7 @@ export class UserService {
             }
         })
         } 
-    }
+    
 
 
     async toggleFavorite(userId: number, productId: number) {
